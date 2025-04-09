@@ -68,18 +68,22 @@ class LoginViewController: UIViewController {
     //MARK: Action
     @objc
     private func loginButtonDidTap() {
-        presentToWelcomeVC()
-        //pushToWelcomeVC()
+        //presentToWelcomeVC()
+        pushToWelcomeVC()
     }
     
     private func presentToWelcomeVC() {
         let welcomeViewController = WelcomeViewController()
-        welcomeViewController.modalPresentationStyle = .fullScreen
+        welcomeViewController.modalPresentationStyle = .formSheet
+    //        welcomeViewController.id = idTextField.text
+        welcomeViewController.setLabelText(id: idTextField.text)
         self.present(welcomeViewController, animated: true)
     }
-    
+
     private func pushToWelcomeVC() {
         let welcomeViewController = WelcomeViewController()
+    //        welcomeViewController.id = idTextField.text
+        welcomeViewController.setLabelText(id: idTextField.text)
         self.navigationController?.pushViewController(welcomeViewController, animated: true)
     }
     

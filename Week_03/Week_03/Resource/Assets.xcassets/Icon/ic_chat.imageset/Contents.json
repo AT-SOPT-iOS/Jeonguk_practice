@@ -1,17 +1,15 @@
 {
   "images" : [
     {
-      "filename" : "상품3.png",
+      "filename" : "bx_chat.svg",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "상품3 1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "상품3 2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

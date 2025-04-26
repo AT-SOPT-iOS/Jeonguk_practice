@@ -29,6 +29,10 @@ enum ImageLiterals {
     static var product9: UIImage { .load(name: "Product9") }
     static var product10: UIImage { .load(name: "Product10") }
     
+    static var heartBlack: UIImage { .load(name: "ic_heart-outlined") }
+    static var heartRed: UIImage { .load(name: "ic_heart_red") }
+    
+    
 }
 
 

@@ -17,5 +17,4 @@ final class UserService {
             responseType: NicknameListResponseWrapper.self
         ).data.nicknameList
     }
-    
 }

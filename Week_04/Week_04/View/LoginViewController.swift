@@ -10,7 +10,7 @@ import Then
 import SnapKit
 
 final class LoginViewController: UIViewController {
-
+    
     private var loginId: String = ""
     private var password: String = ""
     private var nickName: String = ""
@@ -96,33 +96,32 @@ final class LoginViewController: UIViewController {
     }
     
     @objc private func registerButtonTap() {
-         Task {
-             do {
-                 let response = try await RegisterService.shared.PostRegisterData(loginId: self.loginId,
-                                                                                  password: self.password,
-                                                                                  nickName: self.nickName)
-             
-                 let alert = UIAlertController(
-                     title: "계정 생성 성공",
-                     message: "환영합니다, \(response.nickname)님! (ID: \(response.userId))",
-                     preferredStyle: .alert
-                 )
-                 
-                 let okAction = UIAlertAction(title: "확인", style: .default)
-                 alert.addAction(okAction)
-                 self.present(alert, animated: true)
-             } catch {
-                 let alert = UIAlertController(
-                     title: "계정 생성 실패",
-                     message: error.localizedDescription,
-                     preferredStyle: .alert
-                 )
-                 let okAction = UIAlertAction(title: "확인", style: .default)
-                 alert.addAction(okAction)
-                 self.present(alert, animated: true)
-                 
-                 print("회원가입 에러:", error)
-             }
-         }
-     }
+        Task {
+            do {
+                let response = try await AuthService.shared.signup(loginId: self.loginId,
+                                                                   password: self.password,
+                                                                   nickName: self.nickName)
+                let alert = UIAlertController(
+                    title: "계정 생성 성공",
+                    message: "환영합니다, \(response.nickname)님! (ID: \(response.userId))",
+                    preferredStyle: .alert
+                )
+                
+                let okAction = UIAlertAction(title: "확인", style: .default)
+                alert.addAction(okAction)
+                self.present(alert, animated: true)
+            } catch {
+                let alert = UIAlertController(
+                    title: "계정 생성 실패",
+                    message: error.localizedDescription,
+                    preferredStyle: .alert
+                )
+                let okAction = UIAlertAction(title: "확인", style: .default)
+                alert.addAction(okAction)
+                self.present(alert, animated: true)
+                
+                print("회원가입 에러:", error)
+            }
+        }
+    }
 }

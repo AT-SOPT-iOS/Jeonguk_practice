@@ -31,26 +31,26 @@ class GetInfoService {
     
     // MARK: 회원가입 요청 함수 - 서버 통신
     // 비동기적으로 실행 (즉, 이 함수는 잠시 멈췄다가 나중에 결과를 반환할 수 있는 함수)
-      func fetchNicknameList(keyword: String?) async throws -> [String] {
-          guard let request = makeRequest(keyword: keyword) else {
-              throw NetworkError.requestEncodingError
-          }
-
-          let (data, response) = try await URLSession.shared.data(for: request)
-
-          guard let httpResponse = response as? HTTPURLResponse,
-                (200...299).contains(httpResponse.statusCode) else {
-              throw NetworkError.responseError
-          }
-
-          do {
-              let decoded = try JSONDecoder().decode(NicknameListResponseWrapper.self, from: data)
-              return decoded.data.nicknameList
-          } catch {
-              print("디코딩 실패:", error)
-              throw NetworkError.responseDecodingError
-          }
-      }
+    func fetchNicknameList(keyword: String?) async throws -> [String] {
+        guard let request = makeRequest(keyword: keyword) else {
+            throw NetworkError.requestEncodingError
+        }
+        
+        let (data, response) = try await URLSession.shared.data(for: request)
+        
+        guard let httpResponse = response as? HTTPURLResponse,
+              (200...299).contains(httpResponse.statusCode) else {
+            throw NetworkError.responseError
+        }
+        
+        do {
+            let decoded = try JSONDecoder().decode(NicknameListResponseWrapper.self, from: data)
+            return decoded.data.nicknameList
+        } catch {
+            print("디코딩 실패:", error)
+            throw NetworkError.responseDecodingError
+        }
+    }
     
     private func configureHTTPError(errorCode: Int) -> Error {
         return NetworkError(rawValue: errorCode)

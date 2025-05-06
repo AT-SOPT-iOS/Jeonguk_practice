@@ -30,15 +30,15 @@ final class InfoViewController: UIViewController {
     @objc private func searchButtonTap() {
         Task {
             do {
-                let nicknameList = try await GetInfoService.shared.fetchNicknameList(keyword: self.keyword.isEmpty ? nil : self.keyword)
-                
-                let nicknameTexts = nicknameList.map{"\($0)"}.joined(separator:"\n")
-                self.infoLabel.text = "닉네임 리스트:\n\(nicknameTexts)"
-            }
-            catch {
-                self.infoLabel.text = "조회실패 \(error.localizedDescription)"
-            }}
+                let keywordToSend = self.keyword.isEmpty ? nil : self.keyword
+                let nicknameList = try await UserService.shared.fetchNicknameList(keyword: keywordToSend)
 
+                let nicknameTexts = nicknameList.joined(separator: "\n")
+                self.infoLabel.text = "닉네임 리스트:\n\(nicknameTexts)"
+            } catch {
+                self.infoLabel.text = "조회 실패: \(error.localizedDescription)"
+            }
+        }
     }
     
     @objc private func textFieldDidEditing(_ textField: UITextField) {

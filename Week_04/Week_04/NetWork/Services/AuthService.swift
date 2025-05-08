@@ -32,4 +32,23 @@ final class AuthService {
             responseType: RegisterResponseWrapper.self
         ).data // 라서 반환 타입이 RegisterResponseBody임
     }
+    
+    func signin(
+        loginId: String,
+        password: String
+    ) async throws -> LoginResponseBody {
+        
+        let requestModel = LoginRequestBody(
+            loginId: loginId,
+            password: password
+        )
+        let encodedBody = try JSONEncoder().encode(requestModel)
+        
+        return try await APIService.shared.request(
+            path: Endpoint.Auth.signin.path,
+            method: Endpoint.Auth.signin.method,
+            body: encodedBody,
+            responseType: LoginResponseBodyWrapper.self
+        ).data
+    }
 }

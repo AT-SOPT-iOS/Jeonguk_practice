@@ -101,6 +101,13 @@ final class LoginViewController: UIViewController {
                 let response = try await AuthService.shared.signup(loginId: self.loginId,
                                                                    password: self.password,
                                                                    nickName: self.nickName)
+                
+                //  Keychain 자체는 Int를 직접 저장할 수 없고, Data 또는 String 형식만 저장 가능
+                let userId = response.userId
+                let userIdString = String(userId)
+                let saved = KeychainManager.shared.save(key: "userId", value: userIdString)
+                print("Keychain 저장 성공 여부: \(saved)")
+                
                 let alert = UIAlertController(
                     title: "계정 생성 성공",
                     message: "환영합니다, \(response.nickname)님! (ID: \(response.userId))",

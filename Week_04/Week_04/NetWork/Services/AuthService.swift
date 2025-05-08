@@ -14,10 +14,10 @@ final class AuthService {
         loginId: String,
         password: String,
         nickName: String
-    ) async throws -> RegisterResponseBody {
+    ) async throws -> RegisterUserInfo {
         
         // 1. Request body 모델 생성 및 인코딩
-        let requestModel = RegisterRequestBody(
+        let requestModel = RegisterRequest(
             loginId: loginId,
             password: password,
             nickname: nickName
@@ -29,16 +29,16 @@ final class AuthService {
             path: Endpoint.Auth.signup.path,
             method: Endpoint.Auth.signup.method,
             body: encodedBody,
-            responseType: RegisterResponseWrapper.self
+            responseType: RegisterResponse.self
         ).data // 라서 반환 타입이 RegisterResponseBody임
     }
     
     func signin(
         loginId: String,
         password: String
-    ) async throws -> LoginResponseBody {
+    ) async throws -> LoginUserID {
         
-        let requestModel = LoginRequestBody(
+        let requestModel = LoginRequest(
             loginId: loginId,
             password: password
         )
@@ -48,7 +48,7 @@ final class AuthService {
             path: Endpoint.Auth.signin.path,
             method: Endpoint.Auth.signin.method,
             body: encodedBody,
-            responseType: LoginResponseBodyWrapper.self
+            responseType: LoginResponse.self
         ).data
     }
 }

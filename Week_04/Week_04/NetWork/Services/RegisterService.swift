@@ -18,7 +18,7 @@ class RegisterService {
     // 회원가입은 requestBody가 필요함. 이를 위해서 유저네임, 비번, 닉네임을 받아서 request 형식의 데이터 모델로 인코딩을 해주는 과정
     func makeRequestBody(loginId: String, password: String, nickName: String) -> Data? {
         do {
-            let data = RegisterRequestBody(
+            let data = RegisterRequest(
                 loginId: loginId,
                 password: password,
                 nickname: nickName
@@ -51,7 +51,7 @@ class RegisterService {
     }
     
     // MARK: 회원가입 요청 함수 - 서버 통신
-    func PostRegisterData(loginId: String, password: String, nickName: String) async throws -> RegisterResponseBody {
+    func PostRegisterData(loginId: String, password: String, nickName: String) async throws -> RegisterUserInfo {
         
         // makeRequestBody 함수를 이용해서, 리퀘스트 바디를 만들어줍니다! 실패할 경우, 아까 NetworkError에서 선언한 오류들을 던지게 됩니다
         guard let body = makeRequestBody(
@@ -79,7 +79,7 @@ class RegisterService {
         
         // 문제 없으면 디코딩 수행
         do {
-            let decoded = try JSONDecoder().decode(RegisterResponseWrapper.self, from: data)
+            let decoded = try JSONDecoder().decode(RegisterResponse.self, from: data)
             return decoded.data // 결국 정상 반환시 리턴 값
         } catch {
             print("디코딩 실패:", error)

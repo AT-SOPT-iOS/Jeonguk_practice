@@ -7,14 +7,14 @@
 
 import Foundation
 
-struct RegisterResponseWrapper: Codable {
+struct RegisterResponse: Codable {
     let success: Bool
     let code: String
     let message: String
-    let data: RegisterResponseBody // 응답 데이터 (userId, nickname 등 포함)
+    let data: RegisterUserInfo
 }
 
-struct RegisterResponseBody: Codable {
+struct RegisterUserInfo: Codable {
     let userId: Int
     let nickname: String
 }

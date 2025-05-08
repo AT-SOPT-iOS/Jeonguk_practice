@@ -7,15 +7,13 @@
 
 import Foundation
 
-// 닉네임 리스트 응답 모델
-struct NicknameListResponseWrapper: Codable {
+struct NicknameListResponse: Codable {
     let success: Bool
     let code: String
     let message: String
-    let data: nicknameList
+    let data: NicknameList
 }
 
-// 개별 닉네임 항목
-struct nicknameList: Codable {
+struct NicknameList: Codable {
     let nicknameList: [String]
 }

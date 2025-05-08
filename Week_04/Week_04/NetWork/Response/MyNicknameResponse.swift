@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - Welcome
-struct MyNicknameResponseBody: Codable {
+struct MyNicknameResponse: Codable {
     let success: Bool
     let code, message: String
     let data: Nickname

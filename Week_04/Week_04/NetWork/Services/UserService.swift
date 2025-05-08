@@ -14,7 +14,7 @@ final class UserService {
         return try await APIService.shared.request(
             path: Endpoint.User.all(keyword: keyword).path,
             method: Endpoint.User.all(keyword: keyword).method,
-            responseType: NicknameListResponseWrapper.self
+            responseType: NicknameListResponse.self
         ).data.nicknameList
     }
     
@@ -32,8 +32,24 @@ final class UserService {
             path: Endpoint.User.me.path,
             method: Endpoint.User.me.method,
             headers: headers, 
-            responseType: MyNicknameResponseBody.self
+            responseType: MyNicknameResponse.self
         ).data.nickname
     }
+    
+    func UpdateMyNickname() async throws -> String {
+        guard let userIdString = KeychainManager.shared.load(key: "userId") else {
+            throw NSError(domain: "KeychainError", code: -1, userInfo: [NSLocalizedDescriptionKey: "userId가 존재하지 않습니다."])
+        }
 
+        let headers = [
+            "userId": userIdString
+        ]
+        
+        return try await APIService.shared.request(
+            path: Endpoint.User.update.path,
+            method: Endpoint.User.update.method,
+            headers: headers,
+            responseType: MyNicknameResponse.self
+        ).data.nickname
+    }
 }

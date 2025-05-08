@@ -7,13 +7,13 @@
 
 import Foundation
 
-struct LoginResponseBodyWrapper: Codable {
+struct LoginResponse: Codable {
     let success: Bool
     let code, message: String
-    let data: LoginResponseBody
+    let data: LoginUserID
 }
 
-struct LoginResponseBody: Codable {
+struct LoginUserID: Codable {
     let userID: Int
 
     enum CodingKeys: String, CodingKey {

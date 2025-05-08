@@ -44,7 +44,7 @@ class GetInfoService {
         }
         
         do {
-            let decoded = try JSONDecoder().decode(NicknameListResponseWrapper.self, from: data)
+            let decoded = try JSONDecoder().decode(NicknameListResponse.self, from: data)
             return decoded.data.nicknameList
         } catch {
             print("디코딩 실패:", error)

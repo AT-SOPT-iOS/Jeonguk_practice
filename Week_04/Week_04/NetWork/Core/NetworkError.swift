@@ -10,7 +10,7 @@ import Foundation
 enum NetworkError: Int, Error, CustomStringConvertible {
     var description: String { self.errorDescription }
     case requestEncodingError
-    case responseDecodingError
+    case responseDecodingError = 1
     case responseError
     case unknownError
     case loginFailed = 400

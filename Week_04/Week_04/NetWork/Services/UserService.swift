@@ -17,4 +17,23 @@ final class UserService {
             responseType: NicknameListResponseWrapper.self
         ).data.nicknameList
     }
+    
+    func fetchMyNickname() async throws -> String {
+        
+        guard let userIdString = KeychainManager.shared.load(key: "userId") else {
+            throw NSError(domain: "KeychainError", code: -1, userInfo: [NSLocalizedDescriptionKey: "userId가 존재하지 않습니다."])
+        }
+
+        let headers = [
+            "userId": userIdString
+        ]
+        
+        return try await APIService.shared.request(
+            path: Endpoint.User.me.path,
+            method: Endpoint.User.me.method,
+            headers: headers, 
+            responseType: MyNicknameResponseBody.self
+        ).data.nickname
+    }
+
 }

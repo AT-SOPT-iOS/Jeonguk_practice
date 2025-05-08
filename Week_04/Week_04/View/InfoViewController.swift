@@ -48,7 +48,7 @@ final class InfoViewController: UIViewController {
     
     private lazy var myNicknameSearchButton = UIButton().then {
         $0.addTarget(self,
-                     action: #selector(searchButtonTap),
+                     action: #selector(myNicknameSearchButtonTap),
                      for: .touchUpInside)
         $0.backgroundColor = .blue
         $0.setTitle("내 닉네임 검색", for: .normal)
@@ -116,6 +116,18 @@ final class InfoViewController: UIViewController {
 
                 let nicknameTexts = nicknameList.joined(separator: "\n")
                 self.infoLabel.text = "닉네임 리스트:\n\(nicknameTexts)"
+            } catch {
+                self.infoLabel.text = "조회 실패: \(error.localizedDescription)"
+            }
+        }
+    }
+    
+    @objc private func myNicknameSearchButtonTap() {
+        Task {
+            do {
+                let myNickname = try await UserService.shared.fetchMyNickname()
+
+                self.infoLabel.text = "내가 설정한 닉네임:\n\(myNickname)"
             } catch {
                 self.infoLabel.text = "조회 실패: \(error.localizedDescription)"
             }

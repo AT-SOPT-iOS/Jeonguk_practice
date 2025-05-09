@@ -8,11 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		2F596AD32DCC8F3100C96BD9 /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = 2F596AD22DCC8F3100C96BD9 /* SwiftKeychainWrapper */; };
+		2F5B86A62DCDDEC000C3ABF6 /* .swiftformat in Resources */ = {isa = PBXBuildFile; fileRef = 2F5B86A52DCDDEC000C3ABF6 /* .swiftformat */; };
 		2FE19F8C2DC5DBB300531A34 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 2FE19F8B2DC5DBB300531A34 /* Then */; };
 		2FE19F8F2DC5DBDC00531A34 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 2FE19F8E2DC5DBDC00531A34 /* SnapKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2F5B86A52DCDDEC000C3ABF6 /* .swiftformat */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftformat; sourceTree = "<group>"; };
 		2FE19F4E2DC5DAB300531A34 /* Week_04.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Week_04.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -54,6 +56,7 @@
 		2FE19F452DC5DAB300531A34 = {
 			isa = PBXGroup;
 			children = (
+				2F5B86A52DCDDEC000C3ABF6 /* .swiftformat */,
 				2FE19F502DC5DAB300531A34 /* Week_04 */,
 				2FE19F4F2DC5DAB300531A34 /* Products */,
 			);
@@ -77,6 +80,7 @@
 				2FE19F4A2DC5DAB300531A34 /* Sources */,
 				2FE19F4B2DC5DAB300531A34 /* Frameworks */,
 				2FE19F4C2DC5DAB300531A34 /* Resources */,
+				2F5B86A42DCDDE4300C3ABF6 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -139,10 +143,32 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2F5B86A62DCDDEC000C3ABF6 /* .swiftformat in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2F5B86A42DCDDE4300C3ABF6 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nexport PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftformat > /dev/null; then\n  swiftformat .\nelse\n  echo \"warning: SwiftFormat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		2FE19F4A2DC5DAB300531A34 /* Sources */ = {
@@ -163,6 +189,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5KA6J79S24;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Week_04/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -194,6 +221,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5KA6J79S24;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Week_04/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

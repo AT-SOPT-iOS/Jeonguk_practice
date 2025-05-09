@@ -9,10 +9,10 @@ import Foundation
 
 // MARK: - RegisterService (Singleton 패턴)
 class RegisterService {
-    
+
     static let shared = RegisterService() // 싱글톤 인스턴스
     private init() {} // 외부에서 인스턴스 생성 방지
-    
+
     //MARK: 회원가입 요청 바디 생성 함수 - JSON 데이터 생성
     // URL Session에 넣어줄 URL Request를 만드는 부분
     // 회원가입은 requestBody가 필요함. 이를 위해서 유저네임, 비번, 닉네임을 받아서 request 형식의 데이터 모델로 인코딩을 해주는 과정
@@ -31,7 +31,7 @@ class RegisterService {
             return nil
         }
     }
-    
+
     // MARK: URLRequest 생성 함수 - URL, 메서드, 헤더, 바디
     func makeRequest(body: Data?) -> URLRequest {
         let url = URL(string: "http://api.atsopt-seminar4.site/api/v1/auth/signup")! // String 형식이었던 URL을 URL객체로 만들어주고
@@ -46,13 +46,13 @@ class RegisterService {
             request.httpBody = body
         }
         // 이후에 아까 받아온 Body를 넣어줌
-        
+
         return request
     }
-    
+
     // MARK: 회원가입 요청 함수 - 서버 통신
     func PostRegisterData(loginId: String, password: String, nickName: String) async throws -> RegisterUserInfo {
-        
+
         // makeRequestBody 함수를 이용해서, 리퀘스트 바디를 만들어줍니다! 실패할 경우, 아까 NetworkError에서 선언한 오류들을 던지게 됩니다
         guard let body = makeRequestBody(
             loginId: loginId,
@@ -61,22 +61,22 @@ class RegisterService {
         ) else {
             throw NetworkError.requestEncodingError
         }
-        
+
         let request = self.makeRequest(body: body)
         let (data, response) = try await URLSession.shared.data(for: request)
         dump(request)
-        
+
         // 응답 유효성 검사
         guard let httpResponse = response as? HTTPURLResponse else {
             throw NetworkError.responseError
         }
-        
+
         dump(response)
-        
+
         guard (200...299).contains(httpResponse.statusCode) else {
             throw configureHTTPError(errorCode: httpResponse.statusCode)
         }
-        
+
         // 문제 없으면 디코딩 수행
         do {
             let decoded = try JSONDecoder().decode(RegisterResponse.self, from: data)
@@ -86,7 +86,7 @@ class RegisterService {
             throw NetworkError.responseError
         }
     }
-    
+
     private func configureHTTPError(errorCode: Int) -> Error {
         return NetworkError(rawValue: errorCode)
         ?? NetworkError.unknownError

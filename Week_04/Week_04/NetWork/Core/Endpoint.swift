@@ -8,7 +8,7 @@
 import Foundation
 
 enum Endpoint {
-    
+
     enum Auth {
         case signup
         case signin

@@ -17,7 +17,7 @@ enum NetworkError: Int, Error, CustomStringConvertible {
     case internalServerError = 500
     case notFoundError = 404
     case invalidURL
-    
+
     var errorDescription: String {
         switch self {
         case .loginFailed: return "로그인에 실패하였습니다."

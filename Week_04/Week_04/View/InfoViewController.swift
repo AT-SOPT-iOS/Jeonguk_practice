@@ -17,7 +17,7 @@ final class InfoViewController: UIViewController {
     private var keyword: String = ""
     private var editNickname: String = ""
     private let userId: Int = 1 // 실제 로그인된 사용자 ID로 교체 필요
-    
+
     // MARK: - UI Components
 
     private let stackView = UIStackView().then {
@@ -45,7 +45,7 @@ final class InfoViewController: UIViewController {
         $0.layer.cornerRadius = 8
         $0.heightAnchor.constraint(equalToConstant: 44).isActive = true
     }
-    
+
     private lazy var myNicknameSearchButton = UIButton().then {
         $0.addTarget(self,
                      action: #selector(myNicknameSearchButtonTap),
@@ -56,7 +56,7 @@ final class InfoViewController: UIViewController {
         $0.layer.cornerRadius = 8
         $0.heightAnchor.constraint(equalToConstant: 44).isActive = true
     }
-    
+
     private lazy var nickNameEditTextField = UITextField().then {
         $0.addTarget(self,
                      action: #selector(nickNameTextFieldDidEditing(_:)),
@@ -64,7 +64,7 @@ final class InfoViewController: UIViewController {
         $0.backgroundColor = .lightGray
         $0.placeholder = "변경할 닉네임을 입력해주세요"
     }
-    
+
     private lazy var myNicknameEditButton = UIButton().then {
         $0.addTarget(self,
                      action: #selector(myNicknameEditButtonTap),
@@ -105,7 +105,7 @@ final class InfoViewController: UIViewController {
             self.stackView.addArrangedSubview($0)
         }
     }
-    
+
     // MARK: - Actions
 
     @objc private func searchButtonTap() {
@@ -121,7 +121,7 @@ final class InfoViewController: UIViewController {
             }
         }
     }
-    
+
     @objc private func myNicknameSearchButtonTap() {
         Task {
             do {
@@ -133,15 +133,15 @@ final class InfoViewController: UIViewController {
             }
         }
     }
-    
+
     @objc private func myNicknameEditButtonTap() {
 
     }
-    
+
     @objc private func textFieldDidEditing(_ textField: UITextField) {
         self.keyword = textField.text ?? ""
     }
-    
+
     @objc private func nickNameTextFieldDidEditing(_ textField: UITextField) {
         self.editNickname = textField.text ?? ""
     }
